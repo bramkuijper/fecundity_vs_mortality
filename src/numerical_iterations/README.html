@@ -1,0 +1,47 @@
+<h1 id="parental-effects-and-fecundity-versus-viability-selection">Parental effects and fecundity versus viability selection</h1>
+<p>Bram Kuijper, a dot l dot w dot kuijper at exeter.ac.uk</p>
+<h2 id="numerical-iterations-in-c">Numerical iterations in C++</h2>
+<p>Overview of the various files (all a bit clunky but try to upscale running mathematica code over 1000s of nodes):</p>
+<ul>
+<li><code>numsolve.cpp</code>: the skeleton <code>C++</code> file in which mathematica equations will be added using the <code>Python3</code> script <code>generate_cpp.py</code> to produce <code>numsolve2.cpp</code> that is the complete and compilable code</li>
+<li><code>numsolve2.cpp</code>: The main <code>C++</code> file that contains the numerical simulations: compilable code generated from<code>numsolve.cpp</code> by <code>generate_cpp.py</code>. This file does all the numerical work (once compiled that is).</li>
+<li><code>auxiliary.h</code>: <code>C++</code> header file with helper functions to generate unique output file names (so that simultaneous runs do not overwrite each other)</li>
+<li><code>generate_cpp.py</code>: <code>Python3</code> script to combine the exported <code>mathematica</code> equations (present in various <code>*.txt</code> files) to <code>numsolve.cpp</code> in order to create <code>numsolve2.cpp</code></li>
+<li><code>generate_iters.py</code>: <code>Python3</code> script to make a batch file, in which line contains a command to run a single instance of a numerical iteration</li>
+<li><code>plot_sims.py</code>: <code>Python3</code> script to plot a single iteration over time</li>
+<li><code>summarize_sims.py</code>: <code>Python3</code> script to summarize output and parameters from multiple files</li>
+<li><code>makefile</code> : compile the <code>C++</code> code using GNU <code>make</code></li>
+<li><code>variables.txt</code> : (exported from <code>mathematica</code> notebook, see there). All the variables that reflect the ecological or evolutionary dynamics</li>
+<li><code>params.txt</code> : (exported from <code>mathematica</code> notebook, see there). List with parameters of the model</li>
+<li><code>relatedness.txt</code> : (exported from <code>mathematica</code> notebook, see there). Equations of the relatedness coefficients</li>
+<li><code>repvals.txt</code> : (exported from <code>mathematica</code> notebook, see there). Equations of the reproductive values</li>
+<li><code>selgrad.txt</code> : (exported from <code>mathematica</code> notebook, see there). Equations of the selection gradients</li>
+<li><code>patchrecurs.txt</code> : (exported from <code>mathematica</code> notebook, see there). Equations of the patch frequencies</li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<p>To run the <code>C++</code> code:</p>
+<ul>
+<li>a <code>C++</code> compiler (e.g., g++) that supports <code>C++11</code></li>
+<li>the GNU scientific library (<code>GSL</code>)</li>
+<li>GNU <code>make</code></li>
+<li>A terminal like <code>bash</code></li>
+</ul>
+<p>Simulations ran on a UNIX-based system with gcc and the GNU scientific library (GSL) installed. To run everything smoothly on MS-Windows, take a look at MinGW http://www.mingw.org and build GNU GSL within that system (see https://stackoverflow.com/questions/30015656/using-gnu-scientific-library-gsl-under-windows-x64-with-mingw).</p>
+<h2 id="how-to-compile">How to compile</h2>
+<p>Open a terminal and type</p>
+<pre><code>cd &lt;top-level-directory&gt;/src/numerical_iterations
+make </code></pre>
+<p>The directory should now contain the executable file <code>numsolve</code> which can be run as</p>
+<pre><code>./numsolve 1 1 1 1.0 1.0 2.0 2.0 1 1 0.0 0.007088812050083358 1.4106735979665885 0.0 0.0 0.05 0.05 0.05 0.0001 0.16666666666666666 0.16666666666666666 0.16666666666666666 0.16666666666666666 0.16666666666666666 0.16666666666666666 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.5 0.5 0.5 0.1 0.05 0.05 </code></pre>
+<p>i.e., with a whole sleuth of command line parameters (see the <code>main()</code> function in <code>numsolve2.cpp</code> file for more info about those). I wouldn’t type all those values out yourself, rather use the <code>Python3</code> script <code>generate_iters.py</code>.</p>
+<h2 id="how-to-run-multiple-instances-of-the-simulation">How to run multiple instances of the simulation</h2>
+<p>To generate combinations of parameters provided to the command line I have written a <code>Python3</code> script <code>generate_sims.py</code>, for which you need <code>Python3</code> installed with the <code>numpy</code> and <code>pandas</code> packages. On the command line:</p>
+<pre><code>./generate_sims.py &gt; runs.sh</code></pre>
+<p>The file <code>runs.sh</code> is a batch file, each line of which contains a command to run the simulation with a combination of parameters To run all the parameter combinations in the bash shell file <code>runs.sh</code>, execute</p>
+<pre><code>bash runs.sh</code></pre>
+<p>If too much hassle to install python3 with packages to get a batch file create it yourself using <code>R</code> or whatever language you prefer.</p>
+<h2 id="how-to-plot-output">How to plot output</h2>
+<p>Use the <code>Python3</code> script <code>plot_sims.py</code> (requires the <code>Python3</code> packages <code>pandas</code> and <code>matplotlib</code>). On the command line</p>
+<pre><code>./plot_sims.py sim_px_20_8_2019_103126_300641676</code></pre>
+<p>The plot is then written to the file <code>graph_sim_px_20_8_2019_103126_300641676.pdf</code></p>
+<p>If you have multiple files there is also a script <code>summarize_sims.py</code> to summarize output from the last line of multiple files into a single aggregrate output file</p>

@@ -1,0 +1,37 @@
+<h1 id="parental-effects-and-fecundity-versus-viability-selection">Parental effects and fecundity versus viability selection</h1>
+<p>Bram Kuijper, a dot l dot w dot kuijper at exeter.ac.uk</p>
+<h2 id="individual-based-simulations-gillespie-model">Individual-based simulations (Gillespie model)</h2>
+<p>Overview of the various files:</p>
+<ul>
+<li><code>p1p2_normal_n.cpp</code>: the simulation itself</li>
+<li><code>generate_sims.py</code>: <code>Python3</code> script to create batch files with which to run the simulations</li>
+<li><code>plot_sims.py</code>: <code>Python3</code> script to plot a single simulation run</li>
+<li><code>auxiliary.h</code>: helper functions to generate unique file names</li>
+<li><code>makefile</code>: required to compile the code using GNU <code>make</code>.</li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<p>To run the <code>C++</code> code:</p>
+<ul>
+<li>a <code>C++</code> compiler (e.g., g++) that supports <code>C++11</code></li>
+<li>the GNU scientific library (<code>GSL</code>) for random number generation</li>
+<li>GNU <code>make</code></li>
+<li>A terminal like <code>bash</code></li>
+</ul>
+<p>Simulations ran on a UNIX-based system with gcc and the GNU scientific library (GSL) installed. To run everything smoothly on MS-Windows, take a look at MinGW http://www.mingw.org and build GNU GSL within that system (see https://stackoverflow.com/questions/30015656/using-gnu-scientific-library-gsl-under-windows-x64-with-mingw).</p>
+<h2 id="how-to-compile">How to compile</h2>
+<p>Open a terminal and type</p>
+<pre><code>cd &lt;top-level-directory&gt;/src/ibm
+make </code></pre>
+<p>The directory should now contain the executable file <code>xp1p2n</code> which can be run as</p>
+<pre><code>./xp1p2n 0.08164965809277261 0.1224744871391589 1.0 1.0 1.0 1.0 1.0 1.0 2.0 2.0 0  0.02 0.01 0.25 0 0.1 0 1.0 </code></pre>
+<p>i.e., with quite a bunch of command line parameters (see the <code>init_arguments()</code> function in the <code>p1p2_normal_n.cpp</code> file for more info about those).</p>
+<h2 id="how-to-run-multiple-instances-of-the-simulation">How to run multiple instances of the simulation</h2>
+<p>To generate combinations of parameters provided to the command line I have written a <code>Python3</code> script <code>generate_sims.py</code>, for which you need <code>Python3</code> installed with the <code>numpy</code> package. On the command line:</p>
+<pre><code>./generate_sims.py &gt; runs.sh</code></pre>
+<p>The file <code>runs.sh</code> is a batch file, each line of which contains a command to run the simulation with a combination of parameters To run all the parameter combinations in the bash shell file <code>runs.sh</code>, execute</p>
+<pre><code>bash runs.sh</code></pre>
+<p>If too much hassle to install python3 with packages to get a batch file create it yourself using <code>R</code> or whatever language you prefer.</p>
+<h2 id="how-to-plot-output">How to plot output</h2>
+<p>Use the <code>Python3</code> script <code>plot_sims.py</code> (requires the <code>Python3</code> packages <code>pandas</code> and <code>matplotlib</code>). On the command line</p>
+<pre><code>./plot_sims.py sim_px_20_8_2019_103126_300641676</code></pre>
+<p>The plot is then written to the file <code>graph_sim_px_20_8_2019_103126_300641676.pdf</code></p>

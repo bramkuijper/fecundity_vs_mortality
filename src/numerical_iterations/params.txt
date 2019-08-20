@@ -1,0 +1,15 @@
+double Ca1;
+double Ca2;
+double Cm1;
+double Cm2;
+double Fa1;
+double Fa2;
+double Fm1;
+double Fm2;
+double d;
+double s(1);
+double s(2);
+double eulrv;
+double ϵ;
+
+
