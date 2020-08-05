@@ -577,32 +577,32 @@ double p2 = ((struct rparams *) params)->p2;
     if (time < 0)
     {
         // 
-DataFile << "time;ram21;ram11;v1a0;v2m1;f20;raa12;p2;v1m1;f21;v2a1;v2a0;f22;f12;rmm10;f11;rmm20;f10;v2m0;p1;raa22;v1a1;v1m0;" << endl;
+DataFile << "time;ram11;f21;raa12;v2a0;f12;raa22;rmm20;p1;f11;p2;v1a0;v1m1;rmm10;v2m1;v1m0;f10;f20;ram21;v2a1;v2m0;v1a1;f22;" << endl;
     }
 
     // 
-DataFile << time << ";" << ram21 << ";" << 
-ram11 << ";" << 
-v1a0 << ";" << 
-v2m1 << ";" << 
-f20 << ";" << 
-raa12 << ";" << 
-p2 << ";" << 
-v1m1 << ";" << 
+DataFile << time << ";" << ram11 << ";" << 
 f21 << ";" << 
-v2a1 << ";" << 
+raa12 << ";" << 
 v2a0 << ";" << 
-f22 << ";" << 
 f12 << ";" << 
-rmm10 << ";" << 
-f11 << ";" << 
-rmm20 << ";" << 
-f10 << ";" << 
-v2m0 << ";" << 
-p1 << ";" << 
 raa22 << ";" << 
-v1a1 << ";" << 
+rmm20 << ";" << 
+p1 << ";" << 
+f11 << ";" << 
+p2 << ";" << 
+v1a0 << ";" << 
+v1m1 << ";" << 
+rmm10 << ";" << 
+v2m1 << ";" << 
 v1m0 << ";" << 
+f10 << ";" << 
+f20 << ";" << 
+ram21 << ";" << 
+v2a1 << ";" << 
+v2m0 << ";" << 
+v1a1 << ";" << 
+f22 << ";" << 
  endl;
 }
 
