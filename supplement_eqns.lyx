@@ -1,0 +1,2629 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{apjfonts}
+\usepackage{doi}
+\usepackage{color}
+\definecolor{darkblue}{RGB}{28,29,123}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder true
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle true
+\pdf_quoted_options "urlcolor=darkblue,citecolor=darkblue,linkcolor=darkblue"
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Description of the analytical model
+\end_layout
+
+\begin_layout Standard
+For a full overview of the modeling approach, one can consult the Supplementary
+ Mathematica sheet.
+ The analysis below is largely based on a previous model 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kuijper2016"
+literal "false"
+
+\end_inset
+
+, which itself has been based on continuous-time models by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Hardling2003"
+literal "true"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Wild2009a"
+literal "true"
+
+\end_inset
+
+ and, in particular, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Alizon2008"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+General approach
+\end_layout
+
+\begin_layout Standard
+We first work out the ecological dynamic, which consists of solving for
+ the equilibria of (i) patch frequencies, (ii) reproductive values and (iii)
+ relatedness coefficients between the different types of individuals.
+ Subsequently, we (iv) derive selection gradients which reflect how epigenetic
+ resetting phenotypes are changed through the successive invasion of mutants
+ of slight effect.
+ Here we note that the ecological dynamic is updated upon each successful
+ invasion of a novel epigenetic resetting phenotype.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:symbol_overview"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ provides an overview of the different symbols used.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+An overview of the notation used.
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:symbol_overview"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="18" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="middle" width="3cm">
+<column alignment="left" valignment="middle" width="9cm">
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+definition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $B_{z_{i}e_{i}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fecundity of a locally adapted parent with phenotype 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ in environment 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $B_{z_{j}e_{i}}\leq B_{z_{i}e_{i}}$
+\end_inset
+
+ (
+\begin_inset Formula $i\neq j$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $d$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Juvenile migration probability
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $e_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+State of local environment
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f(n_{a},e_{i}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frequency of patches that contain 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ adapted breeders and are in local environmental state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $M_{z_{i}e_{i}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mortality rate of an individual with phenotype 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ in environment 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, where 
+\begin_inset Formula $M_{z_{j}e_{i}}\geq M_{z_{i}e_{i}}$
+\end_inset
+
+ (
+\begin_inset Formula $i\neq j$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of breeders in the local patch, where we assume 
+\begin_inset Formula $n=2$
+\end_inset
+
+ throughout.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $n_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of adult breeders which have a phenotype that matches local conditions,
+ where 
+\begin_inset Formula $0\leq n_{a}\leq n$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of nonfocal adult breeders which have a phenotype that matches local
+ conditions, where 
+\begin_inset Formula $0\leq\hat{n}_{a}\leq n-1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\pi_{z_{j}\rightarrow z_{i}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probability that individual with phenotype 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ produces an individual with phenotype 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $p_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probability that a breeder with phenotype 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ produces 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ offspring
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r_{xy}\left(n_{a},e_{i}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relatedness between an individual in state 
+\begin_inset Formula $x$
+\end_inset
+
+ and another in state 
+\begin_inset Formula $y$
+\end_inset
+
+ in patch with 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ locally adapted breeders and in local environmental state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $x,y\in\{a,m\}$
+\end_inset
+
+ (adapted or maladapted)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $s_{e_{j}\rightarrow e_{i}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rate at which any patch changes from environmental state 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ to 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $0\leq s_{e_{j}\rightarrow e_{i}}\leq\infty$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\psi_{x\rightarrow y}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+probability that an adult breeder in environment 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ and in state 
+\begin_inset Formula $x$
+\end_inset
+
+ produces offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $z_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Individual's phenotype (
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ or 
+\begin_inset Formula $z_{2}$
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $v\left(x,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reproductive value of a focal individual in locally adapted state 
+\begin_inset Formula $x\in\{a,m\}$
+\end_inset
+
+ (adapted, maladapted) whilst living with 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ nonfocal adapted individuals in patch in environmental state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row topspace="default" bottomspace="default">
+<cell alignment="left" valignment="middle" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="middle" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Patch frequencies
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:supplement:Patch-frequencies"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We consider a population in which there are two breeders per patch, each
+ of which can have one of two different phenotypes 
+\begin_inset Formula $z_{i}\in\{z_{1},z_{2}\}$
+\end_inset
+
+.
+ Consequently, there are three configurations of breeder phenotypes in each
+ local environment (both have phenotype 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+; one has phenotype 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ and one has phenotype 
+\begin_inset Formula $z_{2}$
+\end_inset
+
+; both have phenotype 
+\begin_inset Formula $z_{2}$
+\end_inset
+
+).
+ Finally, there are two local environmental states 
+\begin_inset Formula $e_{i}\in\{e_{1},e_{2}\}$
+\end_inset
+
+, thus resulting in 
+\begin_inset Formula $6$
+\end_inset
+
+ different patch frequencies.
+\end_layout
+
+\begin_layout Standard
+We first derive an expression for the total number of competing juveniles
+ 
+\begin_inset Formula $c(n_{a},e_{i})$
+\end_inset
+
+ who compete for a vacant breeding position in a patch which originally
+ contained 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ adapted breeders (preceding mortality events) and 
+\begin_inset Formula $n-n_{a}$
+\end_inset
+
+ maladapted breeders in an 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ environment:
+\begin_inset Formula 
+\begin{align}
+c\left(n_{a},e_{i}\right) & =\left(1-d\right)\left[n_{a}B_{z_{i}e_{i}}+\left(n-n_{a}\right)B_{z_{j}e_{i}}\right]+d\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}f\left(\nu_{a},e_{k}\right)\left[\nu_{a}B_{z_{k}e_{k}}+\left(n-\nu_{a}\right)B_{z_{\ell}e_{k}}\right],\label{eq:supplement:patches:competing_juvs}
+\end{align}
+
+\end_inset
+
+where the first part reflects the total number of philopatric offspring
+  born in the 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+-patch, either born from the 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ adapted parents who have fecundity 
+\begin_inset Formula $B_{z_{i}e_{i}}$
+\end_inset
+
+ or from the 
+\begin_inset Formula $n-n_{a}$
+\end_inset
+
+ maladapted parents who have fecundity 
+\begin_inset Formula $B_{z_{j}e_{i}}$
+\end_inset
+
+ (
+\begin_inset Formula $j\neq i$
+\end_inset
+
+).
+ The second part reflects the total number of immigrant offspring, born
+ on remote patches containing 
+\begin_inset Formula $0\leq\nu_{a}\leq\nu$
+\end_inset
+
+ adapted breeders (and 
+\begin_inset Formula $n-\nu_{a}$
+\end_inset
+
+ maladapted breeders) whilst in environmental state 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+, at frequency 
+\begin_inset Formula $f(\nu_{a},e_{k})$
+\end_inset
+
+.
+ Here we denote the phenotype of adapted breeders (matching environment
+ 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+) with 
+\begin_inset Formula $z_{k}$
+\end_inset
+
+, while maladapted breeders are denoted by phenotype 
+\begin_inset Formula $z_{\ell}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, 
+\begin_inset Formula $l_{a}(n_{a},e_{i})$
+\end_inset
+
+ or 
+\begin_inset Formula $l_{m}(n_{a},e_{i})$
+\end_inset
+
+ reflect the probabilities that local breeders in a 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+ patch produce a offspring that successfully establishes itself as a breeder,
+ and is locally adapted or maladapted respectively:
+\begin_inset Formula 
+\begin{align}
+l_{a}\left(n_{a},e_{i}\right) & =\frac{\left(1-d\right)\left[n_{a}B_{z_{i}e_{i}}\pi_{z_{i}\rightarrow z_{i}}+\left(n-n_{a}\right)B_{z_{j}e_{i}}\pi_{z_{j}\rightarrow z_{i}}\right]}{c\left(n_{a},e_{i}\right)}\label{eq:supplement:patches:locally_adapted}\\
+l_{m}\left(n_{a},e_{i}\right) & =\frac{\left(1-d\right)\left[n_{a}B_{z_{i}e_{i}}\pi_{z_{i}\rightarrow z_{j}}+\left(n-n_{a}\right)B_{z_{j}e_{i}}\pi_{z_{j}\rightarrow z_{j}}\right]}{c\left(n_{a},e_{i}\right)}.\label{eq:supplement:patches:locally_maladapted}
+\end{align}
+
+\end_inset
+
+In the expression above, 
+\begin_inset Formula $\pi_{z_{i}\rightarrow z_{j}}\equiv\pi_{z_{i}\rightarrow z_{j}}(p_{1},p_{2})$
+\end_inset
+
+ is the inheritance function which determines the probability that a 
+\begin_inset Formula $z_{j}$
+\end_inset
+
+ offspring is born from an adult breeder with phenotype 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+, which depends on the probability 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ that a 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+ breeder produces 
+\begin_inset Formula $z_{1}$
+\end_inset
+
+ offspring in the next generation.
+ We then have 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:supplement:pi}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\pi_{z_{1}\rightarrow z_{1}} & =p_{1}\label{eq:supplement:patches:switching_rates_z1z1}\\
+\pi_{z_{1}\rightarrow z_{2}} & =1-p_{1}\label{eq:supplement:patches:switching_rates_z1z2}\\
+\pi_{z_{2}\rightarrow z_{1}} & =p_{2}\label{eq:supplement:patches:switching_rates_z2z1}\\
+\pi_{z_{2}\rightarrow z_{2}} & =1-p_{2}.\label{eq:supplement:patches:switching_rates_z2z2}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+While eq.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+eqref{eq:supplement:pi}
+\end_layout
+
+\end_inset
+
+ considers the transmission probability conditioned on phenotype, sometimes
+ it will be more convenient to consider the probability 
+\begin_inset Formula $\psi_{x\rightarrow y}(e_{i})$
+\end_inset
+
+ that a parent living in environment 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ and in state 
+\begin_inset Formula $x$
+\end_inset
+
+ produces an offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+ in that same environment, where 
+\begin_inset Formula $x,y\in\{a,m\}$
+\end_inset
+
+ (adapted, maladapted).
+ Consequently, we have
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:supplement:psi}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\text{\ensuremath{\psi_{a\rightarrow a}\left(\text{e_{1}}\right)}} & =\psi_{m\rightarrow m}\left(\text{e_{2}}\right)=\pi_{z_{1}\rightarrow z_{1}}=p_{1}\label{eq:supplement:psi_switch_aa}\\
+\text{\ensuremath{\psi_{a\rightarrow m}\left(\text{e_{1}}\right)}} & =\ensuremath{\psi_{m\rightarrow a}\left(\text{e_{2}}\right)}=\pi_{z_{1}\rightarrow z_{2}}=1-p_{1}\label{eq:supplement:psi_switch_am}\\
+\text{\ensuremath{\psi_{m\rightarrow a}\left(\text{e_{1}}\right)}} & =\psi_{a\rightarrow m}\left(\text{e_{2}}\right)=\pi_{z_{2}\rightarrow z_{1}}=p_{2}\label{eq:supplement:psi_switch_ma}\\
+\text{\ensuremath{\psi_{m\rightarrow m}\left(\text{e_{1}}\right)}} & =\psi_{a\rightarrow a}\left(\text{e_{2}}\right)=\pi_{z_{2}\rightarrow z_{2}}=1-p_{2}.\label{eq:supplement:psi_switch_mm}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+Next to the probabilities of successful establishment of locally born offspring
+ in eqns (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:locally_adapted"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:locally_maladapted"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), 
+\begin_inset Formula $\tilde{l}_{a}(n_{a},e_{i})$
+\end_inset
+
+ or 
+\begin_inset Formula $\tilde{l}_{m}(n_{a},e_{i})$
+\end_inset
+
+ reflect the probabilities that a remotely born offspring successfully establish
+es itself as a breeder in a 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+-patch, to which it is locally adapted or maladapted respectively:
+\begin_inset Formula 
+\begin{align}
+\tilde{l}_{a}\left(n_{a},e_{i}\right) & =\frac{d\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}f\left(\nu_{a},e_{k}\right)\left[\nu_{a}B_{z_{k}e_{k}}\pi_{z_{k}\rightarrow z_{i}}+\left(n-\nu_{a}\right)B_{z_{\ell}e_{k}}\pi_{z_{\ell}\rightarrow z_{i}}\right]}{c\left(n_{a},e_{i}\right)}\label{eq:supplement:patches:remote_adapted}\\
+\tilde{l}_{m}\left(n_{a},e_{i}\right) & =\frac{d\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}f\left(\nu_{a},e_{k}\right)\left[\nu_{a}B_{z_{k}e_{k}}\pi_{z_{k}\rightarrow z_{j}}+\left(n-\nu_{a}\right)B_{z_{\ell}e_{k}}\pi_{z_{\ell}\rightarrow z_{j}}\right]}{c\left(n_{a},e_{i}\right)}.\label{eq:supplement:patches:remote_maladapted}
+\end{align}
+
+\end_inset
+
+We then have the following differential equation reflecting the instantaneous
+ change in the frequency 
+\begin_inset Formula $f(n_{a},e_{i})$
+\end_inset
+
+ of patches containing 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ adapted breeders and currently in state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+\frac{\mathrm{d}f\left(n_{a},e_{i}\right)}{\mathrm{d}t} & =s_{e_{j}\rightarrow e_{i}}f\left(n-n_{a},e_{j}\right)-s_{e_{i}\rightarrow e_{j}}f\left(n_{a},e_{i}\right)\nonumber \\
+ & -f\left(n_{a},e_{i}\right)n_{a}M_{z_{i}e_{i}}\left[l_{m}\left(n_{a},e_{i}\right)+\tilde{l}_{m}\left(n_{a},e_{i}\right)\right]\nonumber \\
+ & -f\left(n_{a},e_{i}\right)\left(n-n_{a}\right)M_{z_{j}e_{i}}\left[l_{a}\left(n_{a},e_{i}\right)+\tilde{l}_{a}\left(n_{a},e_{i}\right)\right]\nonumber \\
+ & +f\left(n_{a}+1,e_{i}\right)\left(n_{a}+1\right)M_{z_{i}e_{i}}\left[l_{m}\left(n_{a}+1,e_{i}\right)+\tilde{l}_{m}\left(n_{a}+1,e_{i}\right)\right]\nonumber \\
+ & +f\left(n_{a}-1,e_{i}\right)\left(n-n_{a}-1\right)M_{z_{j}e_{i}}\left[l_{a}\left(n_{a}-1,e_{i}\right)+\tilde{l}_{a}\left(n_{a}-1,e_{i}\right)\right],\label{eq:supplement:patches:dfdt}
+\end{align}
+
+\end_inset
+
+where the first line reflects any changes due to switches in patch environment,
+ the next two lines reflect removal of 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+ due to a death of an adapted breeder (at rate 
+\begin_inset Formula $M_{z_{i}e_{i}}$
+\end_inset
+
+) or a maladapted breeder (at rate 
+\begin_inset Formula $M_{z_{j}e_{i}}$
+\end_inset
+
+, where 
+\begin_inset Formula $i\neq j$
+\end_inset
+
+) respectively.
+ The adapted breeder is then replaced by a maladapted breeder at probability
+ 
+\begin_inset Formula $l_{m}(n_{a},e_{i})+\tilde{l}_{m}(n_{a},e_{i})$
+\end_inset
+
+, while the maladapted breeder is replaced by an adapted breeder at probability
+ 
+\begin_inset Formula $l_{a}(n_{a},e_{i})+\tilde{l}_{a}(n_{a},e_{i})$
+\end_inset
+
+.
+ Note that cases where a dead breeder is replaced by a juvenile of the same
+ phenotype have no effect on the resulting dynamics.
+ 
+\end_layout
+
+\begin_layout Standard
+Similarly, the last two lines reflect the case where the number of 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+ patches is increased.
+ This can either be due to a death of an adapted breeder and replacement
+ by a maladapted individual in a patch containing 
+\begin_inset Formula $0\leq n_{a}+1\leq n$
+\end_inset
+
+ adapted breeders, or by the death of a maladapted breeder and replacement
+ by an adapted individual in a patch containing 
+\begin_inset Formula $0\leq n_{a}-1\leq n$
+\end_inset
+
+ adapted breeders.
+ Equation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:dfdt"
+
+\end_inset
+
+) then results in a system of 
+\begin_inset Formula $(n+1)\times2$
+\end_inset
+
+ differential equations denoted by 
+\begin_inset Formula $\dot{\mathbf{f}}$
+\end_inset
+
+ for all possible combinations of 
+\begin_inset Formula $0\leq n_{a}\leq n$
+\end_inset
+
+ adapted breeders and 
+\begin_inset Formula $e_{i}=\{e_{1},e_{2}\}$
+\end_inset
+
+ patch environments.
+ As noted in the main text, these differential equations are then numerically
+ solved for the point where 
+\begin_inset Formula $\dot{\mathbf{f}}=0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Reproductive values
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:supplement:Reproductive-values"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Similarly, we can derive the dynamics of the reproductive value 
+\begin_inset Formula $v\left(x,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ necessary to derive selection gradients.
+ The arguments of 
+\begin_inset Formula $v\left(x,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ denote, respectively, the state 
+\begin_inset Formula $x\in\{a,m\}$
+\end_inset
+
+ of the focal individual, where 
+\begin_inset Formula $a$
+\end_inset
+
+ denotes adapted and 
+\begin_inset Formula $m$
+\end_inset
+
+ denotes maladapted, 
+\begin_inset Formula $0\leq\hat{n}_{a}\leq n-1$
+\end_inset
+
+ the number of adapted breeders other than the focal, where the focal lives
+ in a 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+-patch.
+ Let 
+\begin_inset Formula $L_{x\rightarrow y}(\hat{n}_{a},e_{i})$
+\end_inset
+
+ then reflect the probability that the focal in state 
+\begin_inset Formula $x$
+\end_inset
+
+ produces a philopatric offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+ who successfully establishes itself in the local patch, conditional upon
+ the availability of a breeding position.
+ We then have
+\begin_inset Formula 
+\begin{align}
+L_{x\rightarrow y}\left(\hat{n}_{a},e_{i}\right) & =\frac{\left(1-d\right)B_{xe_{i}}\psi_{x\rightarrow y}\left(e_{i}\right)}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\label{eq:supplement:rv:Lxy}
+\end{align}
+
+\end_inset
+
+where the total number of competing juvenile offspring 
+\begin_inset Formula $c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)$
+\end_inset
+
+ is again given by eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:competing_juvs"
+
+\end_inset
+
+), where 
+\begin_inset Formula $\delta_{x=a}=1$
+\end_inset
+
+ when the focal breeder is maladapted and 
+\begin_inset Formula $\delta_{x=a}=0$
+\end_inset
+
+ otherwise.
+ 
+\end_layout
+
+\begin_layout Standard
+Similarly, let 
+\begin_inset Formula $\mathcal{O}_{y}\left(\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflect the probability that any non-focal breeder produces an offspring
+ in state 
+\begin_inset Formula $y$
+\end_inset
+
+ who successfully establishes itself in the local patch, conditional upon
+ the availability of a breeding position.
+ We then have
+\begin_inset Formula 
+\begin{align}
+\mathcal{O}_{y}\left(\hat{n}_{a},e_{i}\right) & =\left(1-d\right)\frac{\hat{n}_{a}B_{z_{i}e_{i}}\psi_{a\rightarrow y}\left(e_{i}\right)+\left(n-1-\hat{n}_{a}\right)B_{z_{j}e_{i}}\psi_{m\rightarrow y}\left(e_{i}\right)}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\nonumber \\
+ & +d\frac{\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}f\left(\nu_{a},e_{k}\right)\left[\nu_{a}B_{z_{k}e_{k}}\psi_{a\rightarrow y}\left(e_{k}\right)+\left(n-\nu_{a}\right)B_{z_{\ell}e_{k}}\psi_{m\rightarrow y}\left(e_{k}\right)\right]}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\label{eq:supplement:rv:Oxy}
+\end{align}
+
+\end_inset
+
+where the first part reflects the successful establishment of philopatric
+ offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+ born from the 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ locally breeding (nonfocal) adapted breeders and maladapted breeders.
+ The second part reflects the production of immigrant offspring in state
+ 
+\begin_inset Formula $y$
+\end_inset
+
+ born from adapted and maladapted parents in remote patches.
+ 
+\end_layout
+
+\begin_layout Standard
+As an example, we provide a differential equation describing the instantaneous
+ change in reproductive value of a focal adapted individual (state 
+\begin_inset Formula $a$
+\end_inset
+
+), living in a patch with 
+\begin_inset Formula $0\leq\hat{n}_{a}\leq n-1$
+\end_inset
+
+ adapted nonfocal neighbours, which is in environmental state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Alizon2008"
+literal "true"
+
+\end_inset
+
+, we have
+\begin_inset Formula 
+\begin{align}
+\frac{\mathrm{d}v\left(a,\hat{n}_{a},e_{i}\right)}{\mathrm{d}t} & =\Delta_{1}v\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{2}v\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{3}v\left(a,\hat{n}_{a},e_{i}\right)\nonumber \\
+ & +\Delta_{4}v\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{5}v\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{6}v\left(a,\hat{n}_{a},e_{i}\right)\label{eq:supplement:rv:dvdt}
+\end{align}
+
+\end_inset
+
+where the 
+\begin_inset Formula $\Delta_{i}v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+s indicate the six different events that result in an instantaneous changes
+ of a focal's reproductive value.
+ These events are: 1.
+ environmental change; 2.
+ death of focal; 3.
+ death of a nonfocal who is adapted and replacement by one of the focal's
+ offspring; 4.
+ death of a neighbour who is maladapted and replacement by one of the focal's
+ offspring; 5.
+ death of a neighbour and replacement by nonfocal offspring in a different
+ state than its predecessor; 6.
+ changes in reproductive value due to establishment of focal offspring in
+ remote patches.
+\end_layout
+
+\begin_layout Standard
+The first event is environmental change, so that
+\begin_inset Formula 
+\begin{align}
+\Delta_{1}v\left(a,\hat{n}_{a},e_{i}\right) & =s_{e_{j}\rightarrow e_{i}}\left[v\left(m,n-\hat{n}_{a}-1,e_{j}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right],\label{eq:supplement:rv:V1}
+\end{align}
+
+\end_inset
+
+reflecting the change in reproductive value due to environmental switching
+ 
+\begin_inset Formula $s_{e_{j}\rightarrow e_{i}}$
+\end_inset
+
+, resulting in a change in reproductive value from 
+\begin_inset Formula $v(a,\hat{n}_{a},e_{i}$
+\end_inset
+
+) to 
+\begin_inset Formula $v\left(m,n-\hat{n}_{a}-1,e_{j}\right)$
+\end_inset
+
+ as the adapted focal now becomes maladapted, its 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ adapted neighbours become maladapted, while the focal's 
+\begin_inset Formula $n-\hat{n}_{a}-1$
+\end_inset
+
+ maladapted neighbours (all individuals minus the focal (
+\begin_inset Formula $-1$
+\end_inset
+
+) minus the 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ adapted neighbours) become adapted and the environmental state changes
+ to 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The second event is the change in reproductive value due to death (and subsequen
+t replacement) of the adapted focal individual:
+\begin_inset Formula 
+\begin{align}
+\Delta_{2}v\left(a,\hat{n}_{a},e_{i}\right) & =M_{z_{i}e_{i}}L_{a\rightarrow m}\left(\hat{n}_{a},e_{i}\right)\left[v\left(m,\hat{n}_{a},e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]\nonumber \\
+ & +M_{z_{i}e_{i}}\left[\mathcal{O}_{a}\left(\hat{n}_{a},e_{i}\right)+\mathcal{O}_{m}\left(\hat{n}_{a},e_{i}\right)\right]\left[-v\left(a,\hat{n}_{a},e_{i}\right)\right],\label{eq:supplement:rv:V2}
+\end{align}
+
+\end_inset
+
+where the focal adapted breeder dies (at rate 
+\begin_inset Formula $M_{z_{i}e_{i}}$
+\end_inset
+
+) after which it is either replaced by one of the focal's own maladapted
+ offspring (first line) or a nonfocal offspring (second line), that is either
+ adapted (with probability 
+\begin_inset Formula $O_{a}\left(\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+) or maladapted (with probability 
+\begin_inset Formula $O_{m}\left(\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+).
+ In case the dead focal is replaced by any nonfocal offspring, the focal's
+ new reproductive value is 
+\begin_inset Formula $0$
+\end_inset
+
+, so the effective change in reproductive value is 
+\begin_inset Formula $-v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, 
+\begin_inset Formula $\Delta_{3}v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the change of a focal's reproductive value due to the death of
+ any nonfocal adapted individual, at rate 
+\begin_inset Formula $\hat{n}_{a}M_{z_{i}e_{i}}$
+\end_inset
+
+ and replacement by one of the focal's offspring:
+\begin_inset Formula 
+\begin{align}
+\Delta_{3}v\left(a,\hat{n}_{a},e_{i}\right) & =\hat{n}_{a}M_{z_{i}e_{i}}\left\{ L_{a\rightarrow a}\left(\hat{n}_{a},e_{i}\right)v\left(a,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)\right.\nonumber \\
+ & +\left.L_{a\rightarrow m}\left(\hat{n}_{a,}e_{i}\right)\left[v\left(m,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}-1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]\right\} .\label{eq:supplement:rv:V3}
+\end{align}
+
+\end_inset
+
+With probability 
+\begin_inset Formula $L_{a\rightarrow a}\left(\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ the focal's offspring is adapted, and this newly established offspring
+ has reproductive value 
+\begin_inset Formula $v\left(a,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)$
+\end_inset
+
+.
+ Here, 
+\begin_inset Formula $\hat{n}_{a}-1+\delta_{x=a}$
+\end_inset
+
+ reflects the total number of other adapted breeders in the patch apart
+ from the focal's offspring itself, which is 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ minus the adapted nonfocal breeder who died, plus the phenotype 
+\begin_inset Formula $\delta_{x=a}$
+\end_inset
+
+ of the focal breeder.
+ Note that the reproductive value of the focal breeder itself is unchanged,
+ because the successful establishment of its adapted offspring results in
+ the same number of 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ adapted nonfocal breeders as experienced by the focal breeder.
+ Alternatively, with probability 
+\begin_inset Formula $L_{a\rightarrow m}\left(\hat{n}_{a,}e_{i}\right)$
+\end_inset
+
+ the focal's offspring is maladapted.
+ In this case the reproductive value of this offspring is 
+\begin_inset Formula $v\left(m,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)$
+\end_inset
+
+ while the reproductive value of the focal itself is now 
+\begin_inset Formula $v\left(a,\hat{n}_{a}-1,e_{i}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\hat{n}_{a}-1$
+\end_inset
+
+ is now the total number of nonfocal adapted individuals.
+\end_layout
+
+\begin_layout Standard
+Next, 
+\begin_inset Formula $\Delta_{4}v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the change of a focal's reproductive value due to the death of
+ any nonfocal maladapted individual, at rate 
+\begin_inset Formula $(n-1-\hat{n}_{a})$
+\end_inset
+
+ and replaced by a focal's offspring:
+\begin_inset Formula 
+\begin{align}
+\Delta_{4}v\left(a,\hat{n}_{a},e_{i}\right) & =\left(n-1-\hat{n}_{a}\right)M_{z_{j}e_{i}}\left\{ {\scriptstyle {\textstyle L_{a\rightarrow a}\left(\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}+1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]}}\right.\nonumber \\
+ & +\left.L_{a\rightarrow m}\left(\hat{n}_{a,}e_{i}\right)\left[v\left(m,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}-1,e_{i}\right)\right]-v\left(a,\hat{n}_{a},e_{i}\right)\right\} ,\label{eq:supplement:rv:V4}
+\end{align}
+
+\end_inset
+
+where the derivation follows the same logic as for eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:V3"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Next, 
+\begin_inset Formula $\Delta_{5}v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the change in a focal's reproductive value by the death of a nonfocal
+ adult breeder (either one of the 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ nonfocal adapted breeders or one of the 
+\begin_inset Formula $n-1-\hat{n}_{a}$
+\end_inset
+
+ maladapted breeders respectively), while being replaced by a nonfocal offspring
+ who is maladapted or adapted respectively:
+\begin_inset Formula 
+\begin{align}
+\Delta_{5}v\left(a,\hat{n}_{a},e_{i}\right) & =\hat{n}_{a}M_{z_{i}e_{i}}\mathcal{O}_{m}\left(\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}-1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]\nonumber \\
+ & +\left(n-1-\hat{n}_{a}\right)M_{z_{j}e_{i}}\mathcal{O}_{a}\left(\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}+1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right],\label{eq:supplement:rv:V5}
+\end{align}
+
+\end_inset
+
+where change in reproductive value occurs as the focal now experiences a
+ different number of nonfocal adapted breeders than before.
+\end_layout
+
+\begin_layout Standard
+Finally, 
+\begin_inset Formula $\Delta_{6}v\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the increase in reproductive value due to the focal's offspring
+ taking up breeding positions in remote patches, where positions are vacated
+ by mortalities of adapted and maladapted breeders in remote patches containing
+ 
+\begin_inset Formula $\nu_{a}$
+\end_inset
+
+ adapted breeders in environmental state 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+\Delta_{6}v\left(a,\hat{n}_{a},e_{i}\right) & =dB_{z_{i}e_{i}}\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}\frac{f\left(\nu_{a},e_{k}\right)}{c\left(\nu_{a},e_{k}\right)}\nonumber \\
+ & \times\left\{ \nu_{a}M_{z_{k}e_{k}}\left[\psi_{a\rightarrow a}\left(e_{i}\right)v\left(a,\nu_{a}-1,e_{k}\right)+\psi_{a\rightarrow m}\left(e_{i}\right)v\left(m,\nu_{a}-1,e_{k}\right)\right]\right.\nonumber \\
+ & +\left.\left(n-\nu_{a}\right)M_{z_{j}e_{k}}\left[\psi_{a\rightarrow a}\left(e_{i}\right)v\left(a,\nu_{a},e_{k}\right)+\psi_{a\rightarrow m}\left(e_{i}\right)v\left(m,\nu_{a},e_{k}\right)\right]\right\} ,\label{eq:supplement:rv:V6}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $d$
+\end_inset
+
+ reflects the probality that a focal's offspring migrates to any remote
+ patch, 
+\begin_inset Formula $B_{z_{i}e_{i}}$
+\end_inset
+
+ the adapted focal's fecundity.
+ The probability of arriving on a 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+-patch containing 
+\begin_inset Formula $\nu_{a}$
+\end_inset
+
+ adapted breeders is then given by the patch frequency 
+\begin_inset Formula $f(\nu_{a},e_{k})$
+\end_inset
+
+, where we take averages by summing over all possible patch combinations.
+ On the remote 
+\begin_inset Formula $\nu_{a},e_{k}$
+\end_inset
+
+-patch, juvenile offspring successfull compete with a total number of 
+\begin_inset Formula $c(\nu_{a},e_{k})$
+\end_inset
+
+ offspring (see eq.
+ [
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:competing_juvs"
+
+\end_inset
+
+]).
+ At rate 
+\begin_inset Formula $\nu_{a}M_{z_{k}e_{k}}$
+\end_inset
+
+, one of the adapted breeders dies in the remote patch: in this case, the
+ focal's offspring is adapted to the remote site with probability 
+\begin_inset Formula $\psi_{a\rightarrow a}(e_{i})$
+\end_inset
+
+ or maladapted with probability 
+\begin_inset Formula $\psi_{a\rightarrow m}(e_{i})$
+\end_inset
+
+, resulting in the respective reproductive values 
+\begin_inset Formula $v\left(a,\nu_{a}-1,e_{k}\right)$
+\end_inset
+
+ and 
+\begin_inset Formula $v\left(m,\nu_{a}-1,e_{k}\right)$
+\end_inset
+
+ (the 
+\begin_inset Formula $\nu_{a}-1$
+\end_inset
+
+ denotes the fact that due to the mortality event, one fewer adapted breeder
+ accompanies the focal's offspring in the remote site).
+ Similar arguments ensue in case one of the 
+\begin_inset Formula $n-\nu_{a}$
+\end_inset
+
+ maladapted breeders dies in the remote site.
+ 
+\end_layout
+
+\begin_layout Standard
+In total, the Mathematica sheet describes a system of 
+\begin_inset Formula $2\times n\times2$
+\end_inset
+
+ equations for the instantaneous change in reproductive value, reflecting
+ the two different states 
+\begin_inset Formula $x\in\{a,m\}$
+\end_inset
+
+ of a focal individual, times the total number of combinations of nonfocal
+ adapted individuals (where 
+\begin_inset Formula $\hat{n}_{a}\in\{0,1,\ldots,n-1\}$
+\end_inset
+
+) times the two environments 
+\begin_inset Formula $e_{1},e_{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Relatedness
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:supplement:Relatedness"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As we deal with populations characterized by limited dispersal, we need
+ to consider relatedness among interacting individuals.
+ To this end, 
+\begin_inset Formula $r_{xy}(n_{a},e_{i})$
+\end_inset
+
+ tracks relatedness between two adapted individuals (one in state 
+\begin_inset Formula $x\in\{a,m\}$
+\end_inset
+
+, the other in state 
+\begin_inset Formula $y\in\{a,m\}$
+\end_inset
+
+) in a patch containing a total of 
+\begin_inset Formula $n_{a}$
+\end_inset
+
+ adapted individuals and in environmental state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+To arrive at expressions for the relatedness coefficients, we first derive
+ the probability 
+\begin_inset Formula $\mathcal{L}_{a\rightarrow y}(n_{a},e_{i})$
+\end_inset
+
+ (or 
+\begin_inset Formula $\mathcal{L}_{m\rightarrow y}(n_{a},e_{i})$
+\end_inset
+
+) that a newly established individual in state 
+\begin_inset Formula $y$
+\end_inset
+
+ is born from one of the locally adapted (or maladapted) breeders:
+\begin_inset Formula 
+\begin{align}
+\mathcal{L}_{a\rightarrow y}\left(n_{a},e_{i}\right) & =\frac{\left(1-d\right)n_{a}B_{z_{i}e_{i}}\psi_{a\rightarrow y}\left(e_{i}\right)}{c\left(n_{a},e_{i}\right)}\label{eq:supplement:rv:Lay}\\
+\mathcal{L}_{m\rightarrow y}\left(n_{a},e_{i}\right) & =\frac{\left(1-d\right)\left(n-n_{a}\right)B_{z_{j}e_{i}}\psi_{m\rightarrow y}\left(e_{i}\right)}{c\left(n_{a},e_{i}\right)}.
+\end{align}
+
+\end_inset
+
+We then provide an equilibrium condition for the instantaneous change in
+ relatedness 
+\begin_inset Formula $r_{aa}(n_{a},e_{i})$
+\end_inset
+
+ between two adapted individuals, with similar expressions for 
+\begin_inset Formula $r_{am}(n_{a},e_{i})$
+\end_inset
+
+ and 
+\begin_inset Formula $r_{mm}(n_{a},e_{i})$
+\end_inset
+
+ provided in the online Mathematica sheet.
+ At equilibrium, the instantaneous change in relatedness, given by rathes
+ of change of in total four events should vanish, or
+\begin_inset Formula 
+\begin{align}
+\frac{\mathrm{d}r_{aa}\left(n_{a},e_{i}\right)}{\mathrm{d}t} & =\Delta_{1}+\Delta_{2}+\Delta_{3}+\Delta_{4}=0,\label{eq:supplement:relatedness:draadt}
+\end{align}
+
+\end_inset
+
+where the first event reflects the instantaneous change due to environmental
+ switching 
+\begin_inset Formula 
+\begin{align}
+\Delta_{1} & =s_{e_{j}\rightarrow e_{i}}f\left(n-n_{a},e_{j}\right)\left[r_{mm}\left(n-n_{a},e_{j}\right)-r_{aa}\left(n_{a},e_{i}\right)\right],\label{eq:supplement:relatedness:raa_Delta1}
+\end{align}
+
+\end_inset
+
+where a gain in relatedness among maladapted individuals in an 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ environment, 
+\begin_inset Formula $r_{mm}\left(n-n_{a},e_{j}\right)$
+\end_inset
+
+, occurs due to environmental change of 
+\begin_inset Formula $e_{j}$
+\end_inset
+
+ to 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+.
+ However, as we are at equilibrium (i.e., 
+\begin_inset Formula $\mathrm{d}r_{aa}\left(n_{a},e_{i}\right)/\mathrm{d}t=0$
+\end_inset
+
+), this gain has to be matched by an equal loss in relatedness 
+\begin_inset Formula $-r_{aa}\left(n_{a},e_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, change in 
+\begin_inset Formula $r_{aa}\left(n_{a},e_{i}\right)$
+\end_inset
+
+ occurs to the death of a maladapted individual and replacement by an adapted
+ individual in a 
+\begin_inset Formula $n_{a}-1,e_{i}$
+\end_inset
+
+ patch:
+\begin_inset Formula 
+\begin{align}
+\Delta_{2} & =f\left(n_{a}-1,e_{i}\right)\left(n-\left(n_{a}-1\right)\right)M_{z_{j}e_{i}}\left[l_{a}\left(n_{a}-1,e_{i}\right)+\tilde{l}_{a}\left(n_{a}-1,e_{i}\right)\right]\nonumber \\
+ & \times\left\{ \frac{n_{a}-2}{n_{a}}r_{aa}\left(n_{a}-1,e_{i}\right)\right.\nonumber \\
+ & +\frac{2}{n_{a}}\left[\mathcal{L}_{a\rightarrow a}\left(n_{a}-1,e_{i}\right)\left(\frac{1}{n_{a}-1}+\frac{n_{a}-2}{n_{a}-1}r_{aa}\left(n_{a}-1,e_{i}\right)\right)+\mathcal{L}_{m\rightarrow a}\left(n_{a}-1,e_{i}\right)r_{ma}\left(n_{a}-1,e_{i}\right)\right]\nonumber \\
+ & \left.\phantom{\frac{I}{I}}-r_{aa}\left(n_{a},e_{i}\right)\right\} \label{eq:supplement:raa_Delta2}
+\end{align}
+
+\end_inset
+
+Deaths of maladapted individuals in a 
+\begin_inset Formula $n_{a}-1$
+\end_inset
+
+ patch occur at rate 
+\begin_inset Formula $\left(n_{a}-1\right)M_{z_{j}e_{i}}$
+\end_inset
+
+.
+ Replacement by a newly established adapted individual occurs with probability
+ 
+\begin_inset Formula $l_{a}\left(n_{a}-1,e_{i}\right)+\tilde{l}_{a}\left(n_{a}-1,e_{i}\right)$
+\end_inset
+
+, see eqns.
+ [
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:locally_adapted"
+
+\end_inset
+
+,
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:patches:remote_adapted"
+
+\end_inset
+
+]).
+ With probability 
+\begin_inset Formula $(n_{a}-1)/n_{a}\times(n_{a}-2)/(n_{a}-1)=(n_{a}-2)/n_{a}$
+\end_inset
+
+ one samples a pair of adapted individuals which do not involve the newly
+ established breeder, in which case relatedness among sampled individuals
+ is given by 
+\begin_inset Formula $r_{aa}(n_{a}-1,e_{i})$
+\end_inset
+
+.
+ Alternatively, with probability 
+\begin_inset Formula $1-(n_{a}-2)/n_{a}=2/n_{a}$
+\end_inset
+
+ one samples any pair involving the newly established adapted breeder.
+ This newly established breeder is born from one of the 
+\begin_inset Formula $n_{a}-1$
+\end_inset
+
+ locally adapted breeders with probability 
+\begin_inset Formula $\mathcal{L}_{a\rightarrow a}(n_{a}-1,e_{i})$
+\end_inset
+
+: with probability 
+\begin_inset Formula $1/(n_{a}-1)$
+\end_inset
+
+ the breeder's mother is sampled together with the newly established breeder,
+ and hence relatedness among both is 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Alternatively, with probability 
+\begin_inset Formula $(n_{a}-2)/(n_{a}-1)$
+\end_inset
+
+ a non-parental breeder is sampled, so that relatedness between the newly
+ established breeder and the non-parental breeder is equal to the relatedness
+ between the non-parental breeder and the adapted parent of the newly establishe
+d individual: 
+\begin_inset Formula $r_{aa}(n_{a}-1,e_{i})$
+\end_inset
+
+.
+ Finally, with probability 
+\begin_inset Formula $\mathcal{L}_{m\rightarrow a}(n_{a}-1,e_{i})$
+\end_inset
+
+ the newly established adapted breeder is born from one of the maladapted
+ breeders, so that relatedness between a sampled adapted individual and
+ the newly established adapted individual is then equal to the relatedness
+ between the maladapted parent of the newly established individual and a
+ randomly sampled adapted breeder, or 
+\begin_inset Formula $r_{ma}(n_{a}-1,e_{i})$
+\end_inset
+
+.
+ Finally, near equilibrium, gains have to be matched by an equal loss in
+ relatedness 
+\begin_inset Formula $-r_{aa}\left(n_{a},e_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Next, change occurs due to the death of an adapted individual and replacement
+ by an adapted individual in a 
+\begin_inset Formula $n_{a},e_{i}$
+\end_inset
+
+ patch:
+\begin_inset Formula 
+\begin{align}
+\Delta_{3} & =f\left(n_{a},e_{i}\right)n_{a}M_{z_{i}e_{i}}\left[l_{a}\left(n_{a},e_{i}\right)+\tilde{l}_{a}\left(n_{a},e_{i}\right)\right]\left\{ \frac{n_{a}-2}{n_{a}}r_{aa}\left(n_{a},e_{i}\right)\right.\nonumber \\
+ & +\left.\frac{2}{n_{a}}\left[\mathcal{L}_{a\rightarrow a}\left(n_{a},e_{i}\right)\left(\frac{1}{n_{a}}+\frac{n_{a}-1}{n_{a}}r_{aa}\left(n_{a},e_{i}\right)\right)+\mathcal{L}_{m\rightarrow a}\left(n_{a},e_{i}\right)r_{ma}\left(n_{a},e_{i}\right)\right]-r_{aa}\left(n_{a},e_{i}\right)\right\} ,\label{eq:supplement:raa_Delta3}
+\end{align}
+
+\end_inset
+
+where deaths of adapted individuals occur at rate 
+\begin_inset Formula $n_{a}M_{z_{i}e_{i}}$
+\end_inset
+
+.
+ The equation above can be derived in a similar fashion as the preceding
+ eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:raa_Delta2"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Next, change occurs due to the death of an adapted individual and replacement
+ by an maladapted individual in a 
+\begin_inset Formula $n_{a}+1,e_{i}$
+\end_inset
+
+ patch:
+\begin_inset Formula 
+\begin{align}
+\Delta_{4} & =f\left(n_{a}+1,e_{i}\right)\left(n_{a}+1\right)M_{z_{i}e_{i}}\left[l_{m}\left(n_{a}+1,e_{i}\right)+\tilde{l}_{m}\left(n_{a}+1,e_{i}\right)\right]\left[r_{aa}\left(n_{a}+1,e_{i}\right)-r_{aa}\left(n_{a},e_{i}\right)\right],\label{eq:supplement:raa_Delta4}
+\end{align}
+
+\end_inset
+
+again the equation above can be derived in the same way as eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:raa_Delta2"
+
+\end_inset
+
+), where 
+\begin_inset Formula $l_{m}\left(n_{a}+1,e_{i}\right)+\tilde{l}_{m}\left(n_{a}+1,e_{i}\right)$
+\end_inset
+
+ reflect the total probability that a maladapted individual establishes
+ itself in the local patch.
+ In this case, pairs of adapted individuals can only be sampled among previously
+ established adapted adult breeders, so the gain in relatedness is identical
+ to 
+\begin_inset Formula $r_{aa}\left(n_{a}+1,e_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, equilibrium values 
+\begin_inset Formula $\hat{r}_{aa}\left(n_{a},e_{i}\right),\ \hat{r}_{ma}\left(n_{a},e_{i}\right),\ \hat{r}_{mm}\left(n_{a},e_{i}\right)$
+\end_inset
+
+ are found by solving expression 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:relatedness:draadt"
+
+\end_inset
+
+ and their equivalents in the Mathematica sheet.
+\end_layout
+
+\begin_layout Subsection
+Selection gradients
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:suppl:Selection-gradients"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Based on a derivation in the Supplement of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "Kuijper2016"
+literal "true"
+
+\end_inset
+
+, we then derive the change in fitness of a slightly different mutant with
+ phenotype 
+\begin_inset Formula $\mathbf{p}^{\mathrm{mut}}=[p_{1}^{\mathrm{mut}},p_{2}^{\mathrm{mut}}]$
+\end_inset
+
+ who invades in a population playing the resident strategy 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Geritz1998"
+literal "false"
+
+\end_inset
+
+.
+ To this end, we calculate how the actions of a focal mutant affect the
+ change 
+\begin_inset Formula $\mathrm{d}W(\cdot)/\mathrm{d}t$
+\end_inset
+
+ in fitness over time, where changes in fitness come about through changes
+ in reproductive value (e.g., 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hardling2003,Alizon2008"
+literal "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+By means of example, we focus in the remainder of this section on an adapted
+ focal mutant (hence having state 
+\begin_inset Formula $x=a$
+\end_inset
+
+) who lives in a patch with 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ adapted others and in a local environment in state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+.
+ The total change in fitness is given by
+\begin_inset Formula 
+\begin{align}
+\frac{\mathrm{d}W\left(a,\hat{n}_{a},e_{i}\right)}{\mathrm{d}t} & =\Delta_{2}W\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{3}W\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{4}W\left(a,\hat{n}_{a},e_{i}\right)\nonumber \\
+ & +\Delta_{5}W\left(a,\hat{n}_{a},e_{i}\right)+\Delta_{6}W\left(a,\hat{n}_{a},e_{i}\right)
+\end{align}
+
+\end_inset
+
+where each of the 
+\begin_inset Formula $\Delta W_{i}$
+\end_inset
+
+ reflect how the action of the mutant results in a change in reproductive
+ value for event 
+\begin_inset Formula $i$
+\end_inset
+
+, where the event numbers follow the order as in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:supplement:Reproductive-values"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for the reproductive values and a listing is given in eqns.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:selgrad_component:2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+-
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:selgred_component:6"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) below.
+ The direction of evolutionary change in the phenotype 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ due to a focal mutant in state 
+\begin_inset Formula $a$
+\end_inset
+
+ who lives in a patch with 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ adapted others and in a local environment in state 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ is then proportional to (eg., see eq.
+ A6 in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Alizon2008"
+literal "false"
+
+\end_inset
+
+)
+\begin_inset Formula 
+\begin{align*}
+\left.\frac{\partial}{\partial p_{i}^{\mathrm{mut}}}\frac{\mathrm{d}W(a,n_{a}-1,e_{i})}{\mathrm{d}t}\right|_{p_{i}^{\text{mut}}=p_{i}} & ,
+\end{align*}
+
+\end_inset
+
+while the overall change in the phenotype 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ is a weighted average over all the different states that a focal mutant
+ can attain, or
+\begin_inset Formula 
+\begin{align}
+\Delta p_{i} & =\sum_{n_{a}=0}^{n}\sum_{e_{i}=\{e_{1},e_{2}\}}f\left(n_{a},e_{i}\right)\left\{ \frac{n_{a}}{n}\left[\left.\frac{\partial}{\partial p_{i}^{\mathrm{mut}}}\frac{\mathrm{d}W(a,n_{a}-1,e_{i})}{\mathrm{d}t}\right|_{p_{i}^{\text{mut}}=p_{i}}\right]+\frac{n-n_{a}}{n}\left[\left.\frac{\partial}{\partial p_{i}^{\mathrm{mut}}}\frac{\mathrm{d}W(m,n_{a}-1,e_{i})}{\mathrm{d}t}\right|_{p_{i}^{\text{mut}}=p_{i}}\right]\right\} ,\label{eq:supplement:weighted_selgrad}
+\end{align}
+
+\end_inset
+
+which reflects the change in 
+\begin_inset Formula $p_{i}$
+\end_inset
+
+ due to successive invasion of mutants.
+ When 
+\begin_inset Formula $\Delta p_{1}=0,\Delta p_{2}=0$
+\end_inset
+
+, we have a candidate evolutionarily stable value 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+, numerical values of which are highlighted in the main text.
+\end_layout
+
+\begin_layout Subsubsection
+Selection gradient: components
+\end_layout
+
+\begin_layout Standard
+The first component 
+\begin_inset Formula $\Delta W_{1}$
+\end_inset
+
+ reflects the change in the focal mutant's fitness due to environmental
+ change.
+ However, the mutant's phenotype 
+\begin_inset Formula $\mathbf{p}^{\mathrm{mut}}$
+\end_inset
+
+ does not affect environmental change, so this term would vanish and hence
+ is omitted from eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:weighted_selgrad"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+The second component 
+\begin_inset Formula $\Delta_{2}W\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the change in the focal mutant's fitness due to the death of an
+ adapted focal and replacement by its own offspring that are of a different
+ type than the original focal.
+ It is analogous to eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:V2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), but only considers changes actions of the focal mutant, rather than replaceme
+nt of the focal by nonfocal individuals.
+ Hence,
+\begin_inset Formula 
+\begin{align}
+\Delta_{2}W\left(a,\hat{n}_{a},e_{i}\right) & =M_{z_{i}e_{i}}L_{a\rightarrow m}^{\mathrm{mut}}\left(\hat{n}_{a},e_{i}\right)\left[v\left(m,\hat{n}_{a},e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right],\label{eq:supplement:selgrad_component:2}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $L_{x\rightarrow y}^{\text{mut}}(\hat{n}_{a},e_{i})$
+\end_inset
+
+ reflects the probability that a slightly different mutant focal breeder
+ in state 
+\begin_inset Formula $x$
+\end_inset
+
+ produces a philopatric offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+ who successfully establishes itself in the local patch, conditional upon
+ the availability of a breeding position (see eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:Lxy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align}
+L_{x\rightarrow y}^{\text{mut}}\left(\hat{n}_{a},e_{i}\right) & =\frac{\left(1-d\right)B_{xe_{i}}\psi_{x\rightarrow y}^{\text{mut}}\left(e_{i}\right)}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\label{eq:supplement:rv:Lxy_mutant}
+\end{align}
+
+\end_inset
+
+and 
+\begin_inset Formula $\psi_{x\rightarrow y}^{\mathrm{mut}}(e_{i})$
+\end_inset
+
+ is the state-dependent phenotype switch function (see eq.
+ [
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ref{eq:supplement:psi}
+\end_layout
+
+\end_inset
+
+]), except that the phenotype switch function is itself a function of the
+ mutant switch rates 
+\begin_inset Formula $p_{1}^{\text{mut}}=p_{1}+\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{2}^{\text{mut}}=p_{2}+\delta$
+\end_inset
+
+, rather than of the resident traits.
+\end_layout
+
+\begin_layout Standard
+Next, we have 
+\begin_inset Formula $\Delta_{3}W\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+, which is the change in fitness due to the death of any nonfocal 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{adapted}
+\end_layout
+
+\end_inset
+
+ individual, at rate 
+\begin_inset Formula $\hat{n}_{a}M_{z_{i}e_{i}}$
+\end_inset
+
+ and subsequent replacement by one of the focal's offspring, who is either
+ adapted or maladapted respectively (see eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:V3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align}
+\Delta_{3}W\left(a,\hat{n}_{a},e_{i}\right) & =\hat{n}_{a}M_{z_{i}e_{i}}\left\{ L_{a\rightarrow a}^{\mathrm{mut}}\left(\hat{n}_{a},e_{i}\right)v\left(a,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)\right.\nonumber \\
+ & +\left.L_{a\rightarrow m}^{\mathrm{mut}}\left(\hat{n}_{a,}e_{i}\right)\left[v\left(m,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}-1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]\right\} .\label{eq:supplement:selgrad_component:3}
+\end{align}
+
+\end_inset
+
+Next, we have 
+\begin_inset Formula $\Delta_{4}W\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+, reflecting the change of a focal mutant's fitness due to the death of
+ any nonfocal 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+emph{maladapted}
+\end_layout
+
+\end_inset
+
+ individual, at rate 
+\begin_inset Formula $(n-1-\hat{n}_{a})$
+\end_inset
+
+ and replaced by a focal's offspring, who is either adapted or maladapted
+ respectively (see eq.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:V3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\begin_inset Formula 
+\begin{align}
+\Delta_{4}W\left(a,\hat{n}_{a},e_{i}\right) & =\left(n-1-\hat{n}_{a}\right)M_{z_{j}e_{i}}\left\{ {\scriptstyle {\textstyle L_{a\rightarrow a}^{\mathrm{mut}}\left(\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}+1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]}}\right.\nonumber \\
+ & +\left.L_{a\rightarrow m}^{\mathrm{mut}}\left(\hat{n}_{a,}e_{i}\right)\left[v\left(m,\hat{n}_{a}-1+\delta_{x=a},e_{i}\right)+v\left(a,\hat{n}_{a}-1,e_{i}\right)\right]-v\left(a,\hat{n}_{a},e_{i}\right)\right\} ,\label{eq:supplement:selgrad_component:4}
+\end{align}
+
+\end_inset
+
+Next, we have 
+\begin_inset Formula $\Delta_{5}W\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+, reflecting the change of a focal mutant's fitness by the death of a nonfocal
+ adult breeder (either one of the 
+\begin_inset Formula $\hat{n}_{a}$
+\end_inset
+
+ nonfocal adapted breeders or one of the 
+\begin_inset Formula $n-1-\hat{n}_{a}$
+\end_inset
+
+ maladapted breeders respectively), while being replaced by a nonfocal offspring
+ who is maladapted or adapted respectively:
+\begin_inset Formula 
+\begin{align}
+\Delta_{5}W\left(a,\hat{n}_{a},e_{i}\right) & =\hat{n}_{a}M_{z_{i}e_{i}}\mathcal{O}_{m}^{\mathrm{mut}}\left(a,\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}-1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right]\nonumber \\
+ & +\left(n-1-\hat{n}_{a}\right)M_{z_{j}e_{i}}\mathcal{O}_{a}^{\mathrm{mut}}\left(a,\hat{n}_{a},e_{i}\right)\left[v\left(a,\hat{n}_{a}+1,e_{i}\right)-v\left(a,\hat{n}_{a},e_{i}\right)\right],\label{eq:supplement:selgrad_component:5}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathcal{O}_{y}^{\text{mut}}\left(x,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ is analogous to the expression in eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:Oxy"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and reflects the probability that – given a focal neighbour in state 
+\begin_inset Formula $x\in\{a,m\}$
+\end_inset
+
+ – any related nonfocal breeder produces an offspring in state 
+\begin_inset Formula $y\in\{a,m\}$
+\end_inset
+
+ who successfully establishes itself in the local patch, conditional upon
+ the availability of a breeding position.
+ We then have
+\begin_inset Formula 
+\begin{align}
+\mathcal{O}_{y}^{\text{mut}}\left(a,\hat{n}_{a},e_{i}\right) & =\left(1-d\right)\frac{\hat{n}_{a}B_{z_{i}e_{i}}\psi_{a\rightarrow y}^{\text{mut,rel}}\left(a,e_{i}\right)+\left(n-1-\hat{n}_{a}\right)B_{z_{j}e_{i}}\psi_{m\rightarrow y}^{\mathrm{mut,rel}}\left(a,e_{i}\right)}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\nonumber \\
+ & +d\frac{\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}f\left(\nu_{a},e_{k}\right)\left[\nu_{a}B_{z_{k}e_{k}}\psi_{a\rightarrow y}\left(e_{k}\right)+\left(n-\nu_{a}\right)B_{z_{\ell}e_{k}}\psi_{m\rightarrow y}\left(e_{k}\right)\right]}{c\left(\hat{n}_{a}+\delta_{x=a},e_{i}\right)},\label{eq:supplement:Oymut}
+\end{align}
+
+\end_inset
+
+where 
+\begin_inset Formula $\psi_{x\rightarrow y}^{\text{mut,rel}}\left(z,e_{i}\right)$
+\end_inset
+
+ is the phenotype switch probability expressed by relatives (in state 
+\begin_inset Formula $x$
+\end_inset
+
+) of the focal (in state 
+\begin_inset Formula $z\in\{a,m\}$
+\end_inset
+
+) to produce an offspring in state 
+\begin_inset Formula $y$
+\end_inset
+
+, or 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{subequations}
+\backslash
+label{eq:supplement:psi:mutant_rel}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align}
+\text{\ensuremath{\psi_{a\rightarrow a}^{\text{mut,rel}}\left(z,\text{e_{1}}\right)}} & =\pi_{z_{1}\rightarrow z_{1}}^{\text{mut,rel}}\left(z,e_{1}\right)=p_{1}+r_{za}(\hat{n}_{a}=2,e_{1})\delta p_{1}\label{eq:supplement:psi_switch_aa-1}\\
+\psi_{m\rightarrow m}^{\text{mut,rel}}\left(z,e_{2}\right) & =\pi_{z_{1}\rightarrow z_{1}}^{\text{mut,rel}}\left(z,e_{2}\right)=p_{1}+r_{zm}(\hat{n}_{a}=0,e_{2})\delta p_{1}\\
+\text{\ensuremath{\psi_{a\rightarrow m}^{\text{mut,rel}}\left(z,\text{e_{1}}\right)}} & =\pi_{z_{1}\rightarrow z_{2}}^{\text{mut,rel}}\left(z,e_{1}\right)=1-\left(p_{1}+r_{za}\left(\hat{n}_{a}=1,e_{1}\right)\delta p_{1}\right)\label{eq:supplement:psi_switch_am-1}\\
+\text{\ensuremath{\psi_{m\rightarrow a}^{\text{mut,rel}}\left(z,\text{e_{2}}\right)}} & =\pi_{z_{1}\rightarrow z_{2}}^{\text{mut,rel}}\left(z,e_{2}\right)=1-\left(p_{1}+r_{zm}\left(\hat{n}_{a}=1,e_{2}\right)\delta p_{1}\right)\\
+\text{\ensuremath{\psi_{m\rightarrow a}^{\text{mut,rel}}\left(z,\text{e_{1}}\right)}} & =\pi_{z_{2}\rightarrow z_{1}}^{\text{mut,rel}}\left(z,e_{1}\right)=p_{2}+r_{zm}\left(\hat{n}_{a}=0,e_{1}\right)\delta p_{2}\\
+\text{\ensuremath{\psi_{a\rightarrow m}^{\text{mut,rel}}\left(z,\text{e_{2}}\right)}} & =\pi_{z_{2}\rightarrow z_{1}}^{\text{mut,rel}}\left(z,e_{2}\right)=p_{2}+r_{za}\left(\hat{n}_{a}=1,e_{1}\right)\delta p_{2}\\
+\text{\ensuremath{\psi_{m\rightarrow m}^{\text{mut,rel}}\left(z,\text{e_{1}}\right)}} & =\pi_{z_{2}\rightarrow z_{2}}^{\text{mut,rel}}\left(z,e_{1}\right)=1-\left(p_{2}+r_{zm}\left(\hat{n}_{a}=0,e_{1}\right)\delta p_{2}\right)\label{eq:supplement:psi_switch_ma-1}\\
+\text{\ensuremath{\psi_{a\rightarrow a}^{\text{mut,rel}}\left(z,\text{e_{2}}\right)}} & =\pi_{z_{2}\rightarrow z_{2}}^{\text{mut,rel}}\left(z,e_{2}\right)=1-\left(p_{2}+r_{za}\left(\hat{n}_{a}=2,e_{2}\right)\delta p_{2}\right),\label{eq:supplement:psi_switch_mm-1}
+\end{align}
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{subequations}
+\end_layout
+
+\end_inset
+
+ where relatedness coefficients are derived in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:supplement:Relatedness"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Finally, 
+\begin_inset Formula $\Delta_{6}W\left(a,\hat{n}_{a},e_{i}\right)$
+\end_inset
+
+ reflects the change in fitness due to mutant focal offspring taking up
+ breeding positions in remote patches, where positions are vacated by mortalitie
+s of adapted and maladapted breeders in remote patches containing 
+\begin_inset Formula $\nu_{a}$
+\end_inset
+
+ adapted breeders in environmental state 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align}
+\Delta_{6}W\left(a,\hat{n}_{a},e_{i}\right) & =dB_{z_{i}e_{i}}\sum_{\nu_{a}=0}^{n}\sum_{e_{k}=\{e_{1},e_{2}\}}\frac{f\left(\nu_{a},e_{k}\right)}{c\left(\nu_{a},e_{k}\right)}\nonumber \\
+ & \times\left\{ \nu_{a}M_{z_{k}e_{k}}\left[\psi_{a\rightarrow a}^{\text{mut}}\left(e_{i}\right)v\left(a,\nu_{a}-1,e_{k}\right)+\psi_{a\rightarrow m}^{\text{mut}}\left(e_{i}\right)v\left(m,\nu_{a}-1,e_{k}\right)\right]\right.\nonumber \\
+ & +\left.\left(n-\nu_{a}\right)M_{z_{j}e_{k}}\left[\psi_{a\rightarrow a}^{\text{mut}}\left(e_{i}\right)v\left(a,\nu_{a},e_{k}\right)+\psi_{a\rightarrow m}^{\text{mut}}\left(e_{i}\right)v\left(m,\nu_{a},e_{k}\right)\right]\right\} ,\label{eq:supplement:selgred_component:6}
+\end{align}
+
+\end_inset
+
+where the derivation is similar to eq.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:supplement:rv:V6"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), with the difference that phenotype switch rates are the result of mutant
+ phenotypes 
+\begin_inset Formula $\mathbf{p}^{\text{mut}}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "/Users/bram/Projects/databases/transgenerational"
+options "procbnumer"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
