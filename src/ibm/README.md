@@ -1,4 +1,4 @@
-# Parental effects and fecundity versus viability selection
+# Parental effects and fecundity versus mortality selection
 
 Bram Kuijper, a dot l dot w dot kuijper at exeter.ac.uk
 
